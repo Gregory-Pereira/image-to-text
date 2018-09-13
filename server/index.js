@@ -7,8 +7,6 @@ const path = require('path');
 const fs = require('fs');
 let textDetector = require('../googleCloudVision/index.js').textDetector;
 
-// console.log(textDetector);
-
 
 const app = express();
 app.set('port', 3000);
@@ -39,16 +37,9 @@ app.listen(app.get('port'), ()=> {
 })
 
 
-// app.post('/image', function (req, res) {
-//   labelDetection('./uploads/image.jpg');
-// 
-// })
-
 app.post('/image', (req, res) => {
   console.log('this endpoint was hit');
-  // console.log(req.body, req.file);
-  // var json = JSON.parse(req.body);
-  // console.log(req.params, req.body, req.data)
+  
 })
 
 app.get('/image', (req, res)=> {

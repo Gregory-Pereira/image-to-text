@@ -29,7 +29,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -d --watch",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js & live-server ./public",
+    "wipe": "rm -rf ./uploads; mkdir uploads"
   },
   "author": "",
   "license": "ISC"

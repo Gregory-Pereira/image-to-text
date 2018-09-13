@@ -15,61 +15,27 @@ class FileUploader extends React.Component {
   }
   uploadAndSend() {
     let newFile = document.getElementById('myFile').files[0];
-    console.log((newFile));
     let data = new FormData();
-    data.append('foo', 'bar', 'foobar');
     data.append('file', newFile, newFile.name.slice(0, -4));
-    console.log(data);
     let config = {
       onUploadProgress: function (progressEvent) {
-        var percentCompleted = Math.round( (progressEvent.loaded * 100) / progressEvent.total );
+        var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
       }
     }
-
+    console.log('Data: ', data, ' | Config: ', config);
     axios.post('/image', data, config)
       .then((response) => {
-        //handle success
+        // console.log('response: ', response)
+        // document.getElementById('imageText').innerHTML = `<p id = 'imageText'>Your document has been saved to your filesystem.</p>`;
       }).catch((error) => {
         //handle error
       });
-    // ---------------------------------------------------------------
-    // let headers = {
-    //   'accept': 'application/json',
-    //   'Accept-Language': 'en-US,en;q=0.8',
-    //   'Content-Type': `multipart/form-data`,
-    // }
-    // var blobFile = $('#myFile')[0].files[0];
-    // var formData = new FormData();
-    // formData.append("fileToUpload", blobFile, {headers: headers});
-
-    // console.log(blobFile);
-    // var authOptions = {
-    //   method: 'POST',
-    //   url: 'http://localhost:3000/image',
-    //   data: formData,
-    //   headers: {
-    //     'accept': 'image/png',
-    //     'Accept-Language': 'en-US,en;q=0.8',
-    //     'Content-Type': `multipart/form-data;`
-    //   },
-    // };
-    // axios(authOptions)
-    // console.log(blobFile);
-    // ---------------------------------------------------------------
-    // var getImage = document.getElementById("myFile").files[0];
-    // var xhr = new XMLHttpRequest(); 
-    // xhr.open("POST", "/image");
-    // xhr.setRequestHeader("Content-Type", "image/png");
-    // xhr.onload = function (oEvent) { 
-    //     // Uploaded.
-    // };
-    // xhr.send(getImage);
   }
   onGoogle () {
-    console.log('hi')
+    // Stubbed out function: I want it to be able to display the text of the document and the image once everything has been processed
   }
   render () {
-    if (this.state.img === '') {
+    if (this.state.img === '') { // conditional render
       return (
         <div id = 'file_upload'>
             <h2> Upload your file: </h2>
@@ -89,6 +55,8 @@ class FileUploader extends React.Component {
                 <img id = 'imageUploaded' src = {this.state.img} alt =''/>
                 <br/>
                 <button id = 'googleButton' onClick = {this.onGoogle.bind(this)}> Click me to get your document </button>
+                <br/>
+                <p id = 'imageText'></p>
             </div>
         </div>
     );
